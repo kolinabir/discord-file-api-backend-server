@@ -4,20 +4,22 @@ import { config } from "./config";
 
 const app = express();
 app.use(express.json());
-
-// Add static file serving
 app.use(express.static("public"));
 
 async function startServer() {
   try {
-    // Initialize Discord bot
     await initializeDiscordBot({
       botToken: config.DISCORD_BOT_TOKEN!,
       channelId: config.DISCORD_CHANNEL_ID!,
     });
 
-    // Mount the Discord File API routes
-    app.use("/api", createDiscordUploadAPI());
+    // Mount the Discord File API routes with upload directory config
+    app.use(
+      "/api",
+      createDiscordUploadAPI({
+        uploadDir: config.UPLOAD_DIR,
+      })
+    );
 
     // Error handling middleware
     app.use(
