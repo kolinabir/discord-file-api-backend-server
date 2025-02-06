@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Discord File Download Example</title>
+  </head>
+  <body>
+    <div class="download-container">
+      <input
+        type="text"
+        id="fileUrlInput"
+        placeholder="Enter Discord file URL"
+        style="width: 500px"
+      />
+      <button onclick="downloadFile()">Download File</button>
+    </div>
+
+    <script>
+      async function downloadFile() {
+        const fileUrl = document.getElementById("fileUrlInput").value;
+
+        if (!fileUrl) {
+          alert("Please enter a file URL");
+          return;
+        }
+
+        try {
+          const response = await fetch("/api/download", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ fileUrl }),
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const blob = await response.blob();
+          const downloadUrl = window.URL.createObjectURL(blob);
+          const filename = getFilenameFromUrl(fileUrl);
+
+          const a = document.createElement("a");
+          a.href = downloadUrl;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(downloadUrl);
+        } catch (error) {
+          console.error("Download failed:", error);
+          alert("Failed to download file: " + error.message);
+        }
+      }
+
+      function getFilenameFromUrl(url) {
+        const urlParts = url.split("/");
+        let filename = urlParts[urlParts.length - 1];
+        // Remove Discord query parameters
+        filename = filename.split("?")[0];
+        return filename || "downloaded-file";
+      }
+    </script>
+  </body>
+</html>

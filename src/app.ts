@@ -5,6 +5,9 @@ import { config } from "./config";
 const app = express();
 app.use(express.json());
 
+// Add static file serving
+app.use(express.static("public"));
+
 async function startServer() {
   try {
     // Initialize Discord bot
