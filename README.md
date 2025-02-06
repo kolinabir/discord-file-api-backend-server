@@ -3,9 +3,11 @@
 A Node.js Express API for uploading and downloading files using Discord as storage.
 
 ## Overview
+
 This project is a Node.js application that provides an Express API for uploading and downloading files using Discord as storage. It leverages Discord's infrastructure to securely store files.
 
 ## Features
+
 - Easy integration with Express.js
 - File upload and download functionality
 - Secure storage using Discord's infrastructure
@@ -13,6 +15,7 @@ This project is a Node.js application that provides an Express API for uploading
 - Async/await API
 
 ## Installation
+
 1. Clone the repository:
    ```
    git clone https://github.com/yourusername/discord-file-api.git
@@ -27,6 +30,7 @@ This project is a Node.js application that provides an Express API for uploading
    ```
 
 ## Setup
+
 1. Create a Discord bot at the [Discord Developer Portal](https://discord.com/developers/applications).
 2. Add the bot to your server with file permissions.
 3. Create a channel for file storage.
@@ -38,6 +42,7 @@ This project is a Node.js application that provides an Express API for uploading
    ```
 
 ## Usage
+
 1. Start the server:
    ```
    npm start
@@ -47,6 +52,7 @@ This project is a Node.js application that provides an Express API for uploading
 ## API Endpoints
 
 ### Upload File
+
 **Endpoint:** `POST /api/upload`
 
 Upload a file to Discord storage.
@@ -59,6 +65,7 @@ file: <your_file>
 ```
 
 **Response:**
+
 ```json
 {
   "fileLink": "https://cdn.discordapp.com/attachments/..."
@@ -66,6 +73,7 @@ file: <your_file>
 ```
 
 ### Download File
+
 **Endpoint:** `POST /api/download`
 
 Download a file from Discord storage.
@@ -84,17 +92,20 @@ Content-Type: application/json
 ## Testing the API
 
 ### Using the Web Interface
+
 1. Upload: Visit `http://localhost:3000/upload.html`
 2. Download: Visit `http://localhost:3000/download.html`
 
 ### Using cURL
 
 **Upload:**
+
 ```bash
 curl -X POST -F "file=@/path/to/your/file.pdf" http://localhost:3000/api/upload
 ```
 
 **Download:**
+
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
@@ -107,13 +118,14 @@ curl -X POST \
 
 The API uses standard HTTP status codes:
 
-| Status Code | Description |
-|------------|-------------|
-| 200 | Success |
-| 400 | Bad Request - Missing file or invalid URL |
-| 500 | Server Error - Upload/download failed |
+| Status Code | Description                               |
+| ----------- | ----------------------------------------- |
+| 200         | Success                                   |
+| 400         | Bad Request - Missing file or invalid URL |
+| 500         | Server Error - Upload/download failed     |
 
 Error response format:
+
 ```json
 {
   "error": "Error message description"
@@ -121,6 +133,7 @@ Error response format:
 ```
 
 ## Contributing
+
 1. Fork the repository.
 2. Create your feature branch (`git checkout -b feature/amazing-feature`).
 3. Commit your changes (`git commit -m 'Add some amazing feature'`).
@@ -128,4 +141,5 @@ Error response format:
 5. Open a Pull Request.
 
 ## License
+
 This project is licensed under the MIT License - see the LICENSE file for details.
