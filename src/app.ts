@@ -16,9 +16,7 @@ async function startServer() {
     // Mount the Discord File API routes with upload directory config
     app.use(
       "/api",
-      createDiscordUploadAPI({
-        uploadDir: config.UPLOAD_DIR,
-      })
+      createDiscordUploadAPI()
     );
 
     // Error handling middleware
