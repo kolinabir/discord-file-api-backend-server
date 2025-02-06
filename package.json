@@ -1,0 +1,28 @@
+{
+  "name": "discord-file-api",
+  "version": "1.0.0",
+  "description": "A Node.js package that provides an Express API for uploading and downloading files using Discord as storage.",
+  "main": "src/app.ts",
+  "scripts": {
+    "start": "ts-node src/app.ts",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "discord-file-api": "^1.0.2",
+    "discord.js": "^13.0.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.0.0",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^16.0.0",
+    "jest": "^27.0.0",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.4.3"
+  },
+  "license": "MIT",
+  "author": "Abir Kolin"
+}
