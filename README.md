@@ -1,4 +1,6 @@
-# discord-file-api
+# Discord File API
+
+A Node.js Express API for uploading and downloading files using Discord as storage.
 
 ## Overview
 This project is a Node.js application that provides an Express API for uploading and downloading files using Discord as storage. It leverages Discord's infrastructure to securely store files.
@@ -43,13 +45,80 @@ This project is a Node.js application that provides an Express API for uploading
 2. The server will run on `http://localhost:3000`.
 
 ## API Endpoints
-- **Upload File**
-  - **Endpoint:** `POST /api/upload`
-  - **Request Body:** Form-data with a file key.
-  
-- **Download File**
-  - **Endpoint:** `POST /api/download`
-  - **Request Body:** JSON with a fileUrl key.
+
+### Upload File
+**Endpoint:** `POST /api/upload`
+
+Upload a file to Discord storage.
+
+```http
+POST /api/upload
+Content-Type: multipart/form-data
+
+file: <your_file>
+```
+
+**Response:**
+```json
+{
+  "fileLink": "https://cdn.discordapp.com/attachments/..."
+}
+```
+
+### Download File
+**Endpoint:** `POST /api/download`
+
+Download a file from Discord storage.
+
+```http
+POST /api/download
+Content-Type: application/json
+
+{
+  "fileUrl": "https://cdn.discordapp.com/attachments/..."
+}
+```
+
+**Response:** Binary file data with appropriate content type
+
+## Testing the API
+
+### Using the Web Interface
+1. Upload: Visit `http://localhost:3000/upload.html`
+2. Download: Visit `http://localhost:3000/download.html`
+
+### Using cURL
+
+**Upload:**
+```bash
+curl -X POST -F "file=@/path/to/your/file.pdf" http://localhost:3000/api/upload
+```
+
+**Download:**
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"fileUrl":"YOUR_DISCORD_FILE_URL"}' \
+  http://localhost:3000/api/download \
+  --output downloaded_file.pdf
+```
+
+## Error Responses
+
+The API uses standard HTTP status codes:
+
+| Status Code | Description |
+|------------|-------------|
+| 200 | Success |
+| 400 | Bad Request - Missing file or invalid URL |
+| 500 | Server Error - Upload/download failed |
+
+Error response format:
+```json
+{
+  "error": "Error message description"
+}
+```
 
 ## Contributing
 1. Fork the repository.
